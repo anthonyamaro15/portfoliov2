@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/no-unknown-property": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off",
+    "react/jsx-filename-extension": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "semi": ["error", "always"],
+    "no-empty": "warn", // no empty blocks of code
+    "no-unused-vars": "warn",
+    "curly": "off", // need braces in conditionals
+    "no-debugger": "warn", // turn on for production
+    // "quotes": ["error", "single", "back"],
+    "no-console": "off" // turn on for production/ leave for console errors if something goes wrong
+  }
+}
