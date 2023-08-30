@@ -2,7 +2,7 @@ import Navbar from "../navbar/navbar";
 
 const Page = () => {
   return (
-    <div>
+    <div className="main-container">
       <Navbar />
       Projects
     </div>

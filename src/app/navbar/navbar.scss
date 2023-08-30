@@ -1,0 +1,17 @@
+.navbar {
+  width: 100%;
+  margin-top: 4rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    text-transform: capitalize;
+  }
+
+  .right-side {
+    a {
+      padding: 1rem 1.5rem;
+    }
+  }
+}
