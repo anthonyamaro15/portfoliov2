@@ -19,14 +19,7 @@ export const metadata: Metadata = {
   ],
   assets: "../assets/portfoliov1.png",
   themeColor: "#000000",
-  // openGraph: {
-  //   title: "Anthony Amaro",
-  //   description: "Software Engineer",
-  //   type: "website",
-  //   // images: "../assets/portfoliov1.png",
-  //   images: new ImageResponse("../assets/portfoliov1.png"),
 
-  // },
   description:
     "Hi,  I'm a dedicated and passionate software engineer who thrives on turning intricate challenges into elegant solutions",
 };
