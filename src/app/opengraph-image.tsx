@@ -17,7 +17,10 @@ export default async function og() {
           justifyContent: "center",
         }}
       >
-        <img src="../../public/portfoliov1.png" alt="portfolio main page"></img>
+        <img
+          src="/../../public/portfoliov1.png"
+          alt="portfolio main page"
+        ></img>
       </div>
     ),
     size
