@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     "Software Developer",
     "Anthony Amaro",
   ],
+  assets: "../assets/portfoliov1.png",
+  themeColor: "#000000",
   openGraph: {
     title: "Anthony Amaro",
     description: "Software Engineer",
