@@ -1,0 +1,81 @@
+.experience {
+  padding-top: 12rem;
+
+  .tab-container {
+    margin-top: 1rem;
+
+    .tab-value {
+      font-weight: 400;
+      color: #8892b0;
+
+      &.active {
+        color: #64ffda;
+      }
+
+      &:hover {
+        background: none;
+        border-color: #233554;
+        background: lighten(#233554, 5%);
+        color: #64ffda;
+      }
+    }
+
+    .tab-value[data-active] {
+      border-color: #64ffda;
+    }
+
+    .mantine-Tabs-tabsList {
+      border-color: #233554;
+    }
+  }
+
+  .tab-panel {
+    margin-left: 1rem;
+
+    @media (max-width: 650px) {
+      margin-left: 0;
+    }
+
+    .top {
+      span {
+        font-size: 0.8rem;
+        font-weight: 300;
+      }
+    }
+
+    h4 {
+      text-transform: capitalize;
+      font-weight: 500;
+      color: #ccd6f6;
+
+      a {
+        color: #64ffda;
+      }
+    }
+
+    ul {
+      margin: 0.5rem 0 0 1rem;
+
+      @media (max-width: 650px) {
+        margin-left: 0;
+      }
+
+      li {
+        font-weight: 200;
+        font-family: sans-serif;
+        line-height: 2.3;
+
+        font-size: 0.9rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.skills {
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
