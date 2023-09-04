@@ -13,18 +13,33 @@ const Footer = () => {
   return (
     <footer>
       <div className="left-footer">
-        <a rel="noopener noreferrer" target="_blank" href={github}>
+        <a
+          aria-label="My Github profile"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={github}
+        >
           {" "}
           <span>
             <FiGithub />
           </span>{" "}
         </a>
-        <a rel="noopener noreferrer" target="_blank" href={linkedin}>
+        <a
+          aria-label="My LinkedIn profile"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={linkedin}
+        >
           <span>
             <FaLinkedinIn />
           </span>{" "}
         </a>
-        <a rel="noopener noreferrer" target="_blank" href={twitter}>
+        <a
+          aria-label="My Twitter profile"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={twitter}
+        >
           <span>
             <FiTwitter />
           </span>{" "}

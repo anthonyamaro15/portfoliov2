@@ -38,7 +38,10 @@ const Page = () => {
               <p>{selectedProject?.headerDescription}</p>
             </div>
             <div className="project drawer-single-project">
-              <Image src={selectedProject?.image} alt="Picture of the author" />
+              <Image
+                src={selectedProject?.image}
+                alt={selectedProject?.headerDescription}
+              />
             </div>
 
             <div className="drawer-description-container">
