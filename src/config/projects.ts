@@ -1,4 +1,4 @@
-import portfolioImg from "../assets/portfoliov1.png";
+import portfolioImg from "../../public/portfoliov1.png";
 
 export const PROJECTS = [
   {
