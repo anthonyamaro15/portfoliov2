@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/server";
+import Image from "next/image";
 
 export const size = {
   width: 900,
@@ -17,10 +18,7 @@ export default async function og() {
           justifyContent: "center",
         }}
       >
-        <img
-          src="/../../public/portfoliov1.png"
-          alt="portfolio main page"
-        ></img>
+        <Image src="/../../public/portfoliov1.png" alt="portfolio main page" />
       </div>
     ),
     size
