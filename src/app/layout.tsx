@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nextjs13-seo.vercel.app"),
   title: "Anthony Amaro",
   keywords: [
     "Software",
