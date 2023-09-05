@@ -5,7 +5,7 @@ import Navbar from "../navbar/navbar";
 import Image from "next/image";
 import { Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { PROJECTS } from "@/config/projects";
+// import { PROJECTS } from "@/config/projects";
 import { useState } from "react";
 import TagsComponent from "../../components/tags/tags";
 import "./projects.scss";
@@ -81,7 +81,9 @@ const Page = () => {
         <h1>Some Things I've built</h1>
 
         <div className="projects-container">
-          {PROJECTS.map((project) => (
+          <p>Projects comming soon!</p>
+
+          {/* {PROJECTS.map((project) => (
             <div
               key={project.id}
               className="project"
@@ -90,7 +92,7 @@ const Page = () => {
             >
               <Image src={project.image} alt="Picture of the author" />
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
       <Footer />
