@@ -50,7 +50,7 @@ export const EXPERIENCE = {
 
 export const SKILLS = [
   "TypeScript",
-  "ReacJS",
+  "ReactJS",
   "HTML",
   "CSS",
   "Sass",
@@ -61,6 +61,7 @@ export const SKILLS = [
   "API development",
   "Front End development",
   "Vitejs",
+  "ArcGIS SDK for JavaScript",
   "SQL",
   "NoSQL",
   "Firebase",
