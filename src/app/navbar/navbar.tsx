@@ -12,6 +12,7 @@ const Navbar = () => {
   const matches = useMediaQuery("(max-width: 650px)");
   const pathname = usePathname();
 
+  if (matches === undefined) return null;
   return (
     <>
       {!matches && (
