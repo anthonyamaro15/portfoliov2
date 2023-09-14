@@ -1,7 +1,6 @@
 "use client";
 
 import Footer from "../footer/footer";
-import Navbar from "../navbar/navbar";
 import Image from "next/image";
 import { Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -21,7 +20,6 @@ const Page = () => {
 
   return (
     <div className="main-container">
-      <Navbar />
       <Drawer
         className="drawer-container"
         size="500px"

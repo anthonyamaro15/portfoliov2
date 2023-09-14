@@ -1,13 +1,10 @@
 "use client";
-import Navbar from "./navbar/navbar";
 import Footer from "./footer/footer";
 import "./globals.css";
 
 export default function Home() {
   return (
     <main className="main-container">
-      <Navbar />
-
       <div className="home-page-content content">
         <h1>I'm Anthony Amaro</h1>
         <p>

@@ -1,8 +1,4 @@
 "use client";
-
-"use client";
-
-import Navbar from "../navbar/navbar";
 import { Tabs } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useState } from "react";
@@ -17,7 +13,6 @@ const Page = () => {
 
   return (
     <div className="main-container">
-      <Navbar />
       <div className="timeline">
         <div className="content experience">
           <h1>Where I've Worked</h1>
