@@ -43,6 +43,7 @@ const MobileNavbar = () => {
                 className={pathname === link.path ? "active" : ""}
                 key={link.path}
                 href={link.path}
+                onClick={handleClose}
               >
                 {link.name}
               </Link>

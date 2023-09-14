@@ -1,3 +1,4 @@
+import { RESOURCES } from "@/config/resources";
 import Footer from "../footer/footer";
 import "./contact.scss";
 
@@ -8,9 +9,7 @@ const Page = () => {
         <h1>Contact</h1>
         <p>
           Get in touch or send me and email directly on{" "}
-          <a href="mailto:anthonyamaro5555@gmail.com">
-            anthonyamaro5555@gmail.com
-          </a>
+          <a href={`mailto:${RESOURCES.email}`}>{RESOURCES.email}</a>
         </p>
       </div>
       <Footer />
