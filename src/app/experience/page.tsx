@@ -39,7 +39,7 @@ const Page = () => {
               ))}
             </Tabs.List>
 
-            {EXPERIENCE.jobsDetails.map((job) => (
+            {/* {EXPERIENCE.jobsDetails.map((job) => (
               <Tabs.Panel key={job.id} value={job.id} className="tab-panel">
                 <div className="top">
                   <h4>
@@ -57,7 +57,7 @@ const Page = () => {
                   </ul>
                 </div>
               </Tabs.Panel>
-            ))}
+            ))} */}
           </Tabs>
         </div>
 
