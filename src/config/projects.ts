@@ -1,5 +1,5 @@
 import portfolioImg from "../../public/portfoliov1.png";
-import iucnImg from "../assets/iucn.png";
+//import iucnImg from "../assets/iucn.png";
 
 export const PROJECTS = [
   {
@@ -13,7 +13,7 @@ export const PROJECTS = [
     image: portfolioImg,
     imgAlt: "Portfolio v1 main page",
   },
-  {
+  /* {
     id: "iucn",
     name: "IUCN Contributions for Nature",
     headerDescription:
@@ -25,5 +25,5 @@ export const PROJECTS = [
     github: null,
     image: iucnImg,
     imgAlt: "IUCN Contributions for Nature",
-  },
+  }, */
 ];
