@@ -51,6 +51,7 @@ export const EXPERIENCE = {
 export const SKILLS = [
   "TypeScript",
   "ReactJS",
+  "Rust",
   "HTML",
   "CSS",
   "Sass",
@@ -65,4 +66,5 @@ export const SKILLS = [
   "SQL",
   "NoSQL",
   "Firebase",
+  "n8n",
 ];
