@@ -1,7 +1,19 @@
 import portfolioImg from "../../public/portfoliov1.png";
-//import iucnImg from "../assets/iucn.png";
+import fileFinderImg from "../assets/file-finder.png";
 
 export const PROJECTS = [
+  {
+    id: "file-finder-rust",
+    name: "File Finder (Rust)",
+    headerDescription: "A fast and efficient file finder built in Rust",
+    description:
+      "I built this project to speed up my workflow when navigating large directories. Traditional file explorers felt slow and clunky, so I decided to create a lightweight TUI (Terminal User Interface) tool in Rust. I actually use it on a daily basis to quickly search, preview, and open files directly from the terminal. This project helped me deepen my Rust skills and explore performance-focused development.",
+    technologies: ["Rust", "Crossterm", "Ratatui"],
+    website: "", // optional if you don’t have a demo site for it
+    github: "https://github.com/anthonyamaro15/file-finder-rust",
+    image: fileFinderImg, // replace with actual image import
+    imgAlt: "File Finder Rust TUI preview",
+  },
   {
     id: "portfolio-v1",
     name: "Portfolio version one",
@@ -13,17 +25,4 @@ export const PROJECTS = [
     image: portfolioImg,
     imgAlt: "Portfolio v1 main page",
   },
-  /* {
-    id: "iucn",
-    name: "IUCN Contributions for Nature",
-    headerDescription:
-      "Online tool quantifies contributions to global goals for nature",
-    description:
-      "IUCN (International Union for Conservation of Nature) presents the IUCN Contributions for Nature Platform. This online tool provides governments, civil society and Indigenous Peoples Organisations with a simple way to measure potential contributions from specific actions in specific places towards global biodiversity and climate goals.",
-    technologies: ["React", "TypeScript", "SCSS", "Arcgis SDK JS"],
-    website: "https://www.iucncontributionsfornature.org/",
-    github: null,
-    image: iucnImg,
-    imgAlt: "IUCN Contributions for Nature",
-  }, */
 ];
