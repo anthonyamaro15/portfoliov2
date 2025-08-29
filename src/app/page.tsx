@@ -1,10 +1,21 @@
 "use client";
 import Footer from "./footer/footer";
 import "./globals.css";
+import JsonLd from "@/components/seo/JsonLd";
 
 export default function Home() {
   return (
     <main className="main-container">
+      <JsonLd
+        id="ld-breadcrumb-home"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.anthonyamaro.dev/" },
+          ],
+        }}
+      />
       <div className="home-page-content content">
         <h1>I'm Anthony Amaro</h1>
         <p>
@@ -23,3 +34,5 @@ export default function Home() {
     </main>
   );
 }
+
+// SEO head for Home is handled by src/app/head.tsx

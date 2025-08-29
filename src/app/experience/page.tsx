@@ -1,9 +1,9 @@
 "use client";
+import JsonLd from "@/components/seo/JsonLd";
 import { Tabs } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useState } from "react";
 import { EXPERIENCE, SKILLS } from "../../config/experience";
-import Footer from "../footer/footer";
 import TagsComponent from "../../components/tags/tags";
 import "./experience.scss";
 
@@ -13,6 +13,17 @@ const Page = () => {
 
   return (
     <div className="main-container">
+      <JsonLd
+        id="ld-breadcrumb-experience"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.anthonyamaro.dev/" },
+            { "@type": "ListItem", position: 2, name: "Experience", item: "https://www.anthonyamaro.dev/experience" },
+          ],
+        }}
+      />
       <div className="timeline">
         <div className="content experience">
           <h1>Where I've Worked</h1>
@@ -67,7 +78,7 @@ const Page = () => {
           <TagsComponent data={SKILLS} />
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };

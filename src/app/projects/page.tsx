@@ -1,6 +1,5 @@
 "use client";
-
-import Footer from "../footer/footer";
+import JsonLd from "@/components/seo/JsonLd";
 import Image from "next/image";
 import { Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -20,6 +19,17 @@ const Page = () => {
 
   return (
     <div className="main-container">
+      <JsonLd
+        id="ld-breadcrumb-projects"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.anthonyamaro.dev/" },
+            { "@type": "ListItem", position: 2, name: "Projects", item: "https://www.anthonyamaro.dev/projects" },
+          ],
+        }}
+      />
       <Drawer
         className="drawer-container"
         size="500px"
@@ -28,6 +38,8 @@ const Page = () => {
         onClose={close}
         title={null}
         position="right"
+        overlayProps={{ color: '#000', opacity: 0.7, blur: 4 }}
+        classNames={{ content: 'bg-[var(--color-card)] text-[var(--color-fg)] border border-[var(--color-border)]' }}
       >
         {selectedProject && (
           <div className="drawer-content">
@@ -96,7 +108,7 @@ const Page = () => {
           ))}
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };
