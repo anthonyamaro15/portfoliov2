@@ -19,8 +19,18 @@ const Page = () => {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.anthonyamaro.dev/" },
-            { "@type": "ListItem", position: 2, name: "Experience", item: "https://www.anthonyamaro.dev/experience" },
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://www.anthonyamaro.dev/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Experience",
+              item: "https://www.anthonyamaro.dev/experience",
+            },
           ],
         }}
       />
@@ -78,7 +88,6 @@ const Page = () => {
           <TagsComponent data={SKILLS} />
         </div>
       </div>
-      
     </div>
   );
 };
