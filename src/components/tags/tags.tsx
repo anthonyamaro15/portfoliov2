@@ -7,9 +7,11 @@ interface TagsComponentProps {
 
 const TagsComponent = ({ size = "md", data }: TagsComponentProps) => {
   return (
-    <div className={`${size} tag-component`}>
+    <div className={`${size} tag-component`}> 
       {data?.map((tag, i) => (
-        <span key={i}>{tag}</span>
+        <span key={i} className="transition-colors">
+          {tag}
+        </span>
       ))}
     </div>
   );
