@@ -4,28 +4,21 @@
   flex-wrap: wrap;
 
   span {
-    font-weight: 500;
-    text-transform: capitalize;
-    border: 1px solid #8892b0;
-    padding: 0.3rem 0.7rem;
+    @apply transition-colors;
+    font-weight: 600;
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.55rem;
     margin: 0.3rem 0.5rem 0.3rem 0;
-    border-radius: 4px;
-    color: #8892b0;
+    border-radius: 9999px;
+    color: var(--color-fg-muted);
+    background: color-mix(in srgb, var(--color-card) 94%, var(--color-fg-muted) 6%);
     text-transform: uppercase;
-    &:first-child {
-      margin-left: 0;
-    }
+    letter-spacing: 0.06em;
+
+    &:first-child { margin-left: 0; }
   }
 }
 
-.md {
-  span {
-    font-size: 0.8rem;
-  }
-}
-
-.sm {
-  span {
-    font-size: 0.6rem;
-  }
-}
+.md { span { font-size: 0.72rem; } }
+.sm { span { font-size: 0.62rem; } }
+.lg { span { font-size: 0.82rem; } }
