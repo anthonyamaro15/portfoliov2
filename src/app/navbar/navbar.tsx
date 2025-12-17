@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { Button } from "@/components/ui/button";
 import MobileNavbar from "../mobileNav/mobileNav";
 import { LINKS } from "@/config/routes";
 
@@ -16,8 +17,8 @@ const Navbar = () => {
       {!matches && (
         <nav className="sticky top-0 z-50 nav-blur h-16 md:h-[72px]">
           <div className="mx-auto max-w-[1100px] px-5 md:px-8 py-3 md:py-4 h-full grid grid-cols-3 items-center">
-            <div className="flex items-center gap-2 text-slate-100">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[var(--color-accent)] text-slate-900 font-bold">
+            <div className="flex items-center gap-2 text-foreground">
+              <span className="inline-flex h-8 w-8 items-center justify-center bg-foreground text-background font-bold text-sm">
                 AA
               </span>
               <span className="font-semibold tracking-tight">
@@ -29,26 +30,22 @@ const Navbar = () => {
                 <Link
                   key={link.path}
                   href={link.path}
-                  className={`relative px-3 py-2 text-sm transition-colors duration-200 ${pathname === link.path ? "text-white" : "text-slate-300 hover:text-white"}`}
+                  className={`relative px-3 py-2 text-sm transition-colors duration-200 ${pathname === link.path ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                   aria-current={pathname === link.path ? "page" : undefined}
                 >
-                  <span className="relative inline-block after:absolute after:left-1 after:right-1 after:-bottom-[2px] after:h-[2px] after:bg-[var(--color-accent)] after:rounded-full after:scale-x-0 after:origin-left after:transition-transform after:duration-200 hover:after:scale-x-100">
+                  <span className="relative inline-block after:absolute after:left-0 after:right-0 after:-bottom-[2px] after:h-[1px] after:bg-foreground after:scale-x-0 after:origin-left after:transition-transform after:duration-200 hover:after:scale-x-100">
                     {link.name}
                   </span>
                   {pathname === link.path && (
-                    <span className="pointer-events-none absolute left-2 right-2 -bottom-[2px] h-[2px] rounded-full bg-[var(--color-accent)]" />
+                    <span className="pointer-events-none absolute left-2 right-2 -bottom-[2px] h-[1px] bg-foreground" />
                   )}
                 </Link>
               ))}
             </div>
             <div className="flex items-center justify-end">
-              <Link
-                href="/blogs"
-                className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium transition focus:outline-none text-white"
-                style={{ backgroundColor: "var(--accent)" }}
-              >
-                Blogs
-              </Link>
+              <Button size="sm" asChild>
+                <Link href="/blogs">Blogs</Link>
+              </Button>
             </div>
           </div>
         </nav>

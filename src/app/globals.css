@@ -28,47 +28,46 @@ html { box-sizing: border-box; margin: 0; padding: 0; }
 
 .content h1 { margin-bottom: 1rem; font-size: 2rem; letter-spacing: 0.02em; text-transform: none; }
 
-/* Subtle radial gradient for hero area (inspired by Next/Vite aesthetics) */
+/* Lyra style - subtle neutral gradient for hero area */
 .hero-radial {
   position: absolute;
   inset: -30% -10% 0 -10%;
   background:
-    radial-gradient(600px 300px at 20% 10%, rgba(62,207,142,0.18), rgba(62,207,142,0) 60%),
-    radial-gradient(800px 400px at 60% -10%, rgba(62,207,142,0.12), rgba(62,207,142,0) 60%);
+    radial-gradient(600px 300px at 20% 10%, rgba(255,255,255,0.04), rgba(255,255,255,0) 60%),
+    radial-gradient(800px 400px at 60% -10%, rgba(255,255,255,0.03), rgba(255,255,255,0) 60%);
   filter: blur(24px);
   pointer-events: none;
 }
 
-/* Modern tag/badge defaults (used by Tags component via classes) */
+/* Lyra style badge - boxy and sharp */
 .badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-card) 94%, var(--color-fg-muted) 6%);
-  color: var(--color-fg-muted);
-  border-radius: 9999px;
-  padding: 0.25rem 0.5rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--secondary));
+  color: hsl(var(--muted-foreground));
+  border-radius: 0;
+  padding: 0.25rem 0.625rem;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
-/* Focus ring */
+/* Focus ring - Lyra style */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
 }
 
-/* Subtle dot grid background layer (Next-like) */
+/* Lyra style - subtle grid background */
 html {
   background-color: var(--color-bg);
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0),
-    radial-gradient(600px 300px at 20% -10%, rgba(62,207,142,0.12), rgba(62,207,142,0) 60%);
-  background-size: 24px 24px, auto;
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+  background-size: 24px 24px;
 }
-/* Nav translucent surface */
-.nav-blur { background: rgba(9,11,16,0.8); backdrop-filter: saturate(180%) blur(10px); }
+/* Lyra style - nav translucent surface */
+.nav-blur { background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); }
 
 @layer base {
   :root {
@@ -96,33 +95,35 @@ html {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    /* Lyra style - boxy and sharp with neutral colors */
+    --background: 0 0% 4%;              /* Near black */
+    --foreground: 0 0% 95%;             /* Near white */
+    --card: 0 0% 7%;                    /* Dark card */
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 98%;                /* White primary for contrast */
+    --primary-foreground: 0 0% 4%;      /* Dark text on primary */
+    --secondary: 0 0% 12%;              /* Subtle secondary */
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;       /* Muted text */
+    --accent: 0 0% 15%;                 /* Subtle accent */
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 0 0% 18%;                 /* Visible borders */
+    --input: 0 0% 18%;
+    --ring: 0 0% 98%;                   /* White focus ring */
+    --chart-1: 0 0% 80%;
+    --chart-2: 0 0% 60%;
+    --chart-3: 0 0% 40%;
+    --chart-4: 0 0% 30%;
+    --chart-5: 0 0% 20%;
+    --radius: 0rem;
   }
 }
 

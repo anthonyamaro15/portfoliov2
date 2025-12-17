@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { PROJECTS } from "@/config/projects";
 import { useState } from "react";
-import TagsComponent from "../../components/tags/tags";
 
 const Page = () => {
   const [opened, setOpened] = useState(false);
@@ -20,39 +23,43 @@ const Page = () => {
       <Sheet open={opened} onOpenChange={setOpened}>
         <SheetContent
           side="right"
-          className="w-[500px] sm:max-w-[500px] bg-[var(--color-card)] text-[var(--color-fg)] border-l border-[var(--color-border)] overflow-y-auto"
+          className="w-[500px] sm:max-w-[500px] bg-card text-foreground border-l border-border overflow-y-auto"
         >
           {selectedProject && (
-            <div className="drawer-content text-slate-200 pt-6">
+            <div className="drawer-content pt-6">
               <div className="space-y-3">
                 <h2 className="text-2xl font-semibold">{selectedProject?.name}</h2>
-                <p className="text-sm text-slate-300">{selectedProject?.headerDescription}</p>
+                <p className="text-sm text-muted-foreground">{selectedProject?.headerDescription}</p>
               </div>
-              <div className="mt-4 rounded-lg overflow-hidden border border-slate-800">
+              <div className="mt-4 rounded-lg overflow-hidden border border-border">
                 <Image src={selectedProject?.image} alt={selectedProject?.headerDescription} />
               </div>
               <div className="mt-6 space-y-2">
                 <h3 className="text-lg font-medium">About</h3>
-                <p className="text-sm text-slate-300">{selectedProject?.description}</p>
+                <p className="text-sm text-muted-foreground">{selectedProject?.description}</p>
               </div>
               <div className="mt-6 space-y-2">
                 <h3 className="text-lg font-medium">Technologies</h3>
-                <TagsComponent size="sm" data={selectedProject?.technologies} />
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject?.technologies?.map((t: string, i: number) => (
+                    <Badge key={i} variant="secondary" className="text-xs">{t}</Badge>
+                  ))}
+                </div>
               </div>
               <div className="mt-6 space-y-1">
                 <h3 className="text-lg font-medium">Website</h3>
-                <a rel="noopener noreferrer" target="_blank" href={selectedProject?.website} className="text-sm text-[var(--color-accent)] underline">
+                <a rel="noopener noreferrer" target="_blank" href={selectedProject?.website} className="text-sm text-primary underline hover:text-primary/80">
                   {selectedProject?.website}
                 </a>
               </div>
               <div className="mt-6 space-y-1">
                 <h3 className="text-lg font-medium">GitHub</h3>
                 {selectedProject?.github ? (
-                  <a rel="noopener noreferrer" target="_blank" href={selectedProject?.github} className="text-sm text-[var(--color-accent)] underline">
+                  <a rel="noopener noreferrer" target="_blank" href={selectedProject?.github} className="text-sm text-primary underline hover:text-primary/80">
                     {selectedProject?.github}
                   </a>
                 ) : (
-                  <span className="text-sm text-slate-500">Not available</span>
+                  <span className="text-sm text-muted-foreground">Not available</span>
                 )}
               </div>
             </div>
@@ -62,63 +69,58 @@ const Page = () => {
       <div className="content py-24">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 className="text-2xl md:text-3xl font-semibold text-white">Projects</h1>
-          <div role="tablist" aria-label="Project filters" className="inline-flex rounded-md border border-[var(--color-border)] bg-[var(--color-card)]/90 p-1 text-sm">
-            {(['All','Web','Tools'] as const).map((tab) => (
-              <button
-                key={tab}
-                role="tab"
-                aria-selected={filter === tab}
-                onClick={() => setFilter(tab)}
-                className={`px-3 py-1.5 rounded ${filter === tab ? 'text-white' : 'text-slate-300 hover:text-white'}`}
-                style={filter === tab ? { backgroundColor: 'rgba(12,15,20,0.9)' } : undefined}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+          <Tabs value={filter} onValueChange={(v) => setFilter(v as 'All' | 'Web' | 'Tools')}>
+            <TabsList className="bg-card/90">
+              <TabsTrigger value="All">All</TabsTrigger>
+              <TabsTrigger value="Web">Web</TabsTrigger>
+              <TabsTrigger value="Tools">Tools</TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
         <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {PROJECTS.filter(p => filter === 'All' ? true : p.category === filter).map((project) => (
-            <button
+            <Card
               key={project.id}
-              className="group text-left rounded-xl overflow-hidden border border-[var(--color-border)] shadow-card bg-[var(--color-card)]/90 backdrop-blur-[2px] hover:-translate-y-0.5 transition-transform"
+              className="group bg-card/90 backdrop-blur-[2px] hover:-translate-y-0.5 transition-transform cursor-pointer overflow-hidden"
               onClick={() => handleClick(project)}
             >
               <div className="relative">
                 <Image src={project.image} alt={project.imgAlt} />
-                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition" />
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/10 transition" />
               </div>
-              <div className="p-4">
+              <CardContent className="p-4">
                 <h3 className="text-base font-medium text-white">{project.name}</h3>
-                <p className="mt-1 text-sm text-slate-300">{project.headerDescription}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{project.headerDescription}</p>
                 {project.metrics && (
-                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-slate-400">
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-muted-foreground">
                     {project.metrics.slice(0, 2).map((m: string, i: number) => (
-                      <div key={i} className="rounded-md border border-borderD bg-slate-900/50 px-2 py-1">{m}</div>
+                      <div key={i} className="rounded-md border border-border bg-background/50 px-2 py-1">{m}</div>
                     ))}
                   </div>
                 )}
                 <div className="mt-3 flex flex-wrap gap-2">
                   {project.technologies?.slice(0, 4).map((t: string, i: number) => (
-                    <span key={i} className="text-[11px] uppercase tracking-wide px-2 py-0.5 rounded border border-[var(--color-border)] text-slate-300 bg-slate-800/50">
-                      {t}
-                    </span>
+                    <Badge key={i} variant="secondary" className="text-xs">{t}</Badge>
                   ))}
                 </div>
-                <div className="mt-4 flex gap-2">
+                <div className="mt-4 flex gap-2" onClick={(e) => e.stopPropagation()}>
                   {project.website && (
-                    <a href={project.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-md px-3 py-1.5 text-xs font-medium transition focus:outline-none text-white" style={{ backgroundColor: 'var(--accent)' }}>
-                      Live
-                    </a>
+                    <Button size="sm" asChild>
+                      <a href={project.website} target="_blank" rel="noopener noreferrer">
+                        Live
+                      </a>
+                    </Button>
                   )}
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-md border border-slate-700 px-3 py-1.5 text-xs font-medium hover:bg-slate-800 transition">
-                      Source
-                    </a>
+                    <Button size="sm" variant="outline" asChild>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        Source
+                      </a>
+                    </Button>
                   )}
                 </div>
-              </div>
-            </button>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

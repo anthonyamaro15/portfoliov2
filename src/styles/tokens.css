@@ -1,35 +1,32 @@
 :root {
-  /* Dark-only tokens (Next+Supabase noir) */
-  --color-bg: #0A0B0D;      /* page */
-  --color-card: #0C0F14;    /* surface */
-  --color-surface-strong: #090B10; /* nav/footer */
-  --color-border: #1A2028;  /* thin borders */
-  --color-fg: #E7E9EE;      /* text */
-  --color-fg-muted: #9AA3AF;/* muted */
-  /* Accent scale (Supabase vibe, toned down) */
-  --accent-700: #237A53;
-  --accent-600: #2B9163; /* default */
-  --accent-500: #35A973;
-  --accent: var(--accent-600);
-  --color-accent: var(--accent); /* backward-compatible */
+  /* Lyra style - neutral dark theme */
+  --color-bg: #0a0a0a;      /* page - pure neutral */
+  --color-card: #121212;    /* surface */
+  --color-surface-strong: #0a0a0a; /* nav/footer */
+  --color-border: #2e2e2e;  /* visible borders */
+  --color-fg: #f2f2f2;      /* text */
+  --color-fg-muted: #999999;/* muted */
+  /* Neutral accent (Lyra uses white/neutral for CTAs) */
+  --accent: #ffffff;
+  --color-accent: var(--accent);
 
-  /* Radii */
-  --radius-sm: 8px;   /* inputs */
-  --radius-md: 10px;  /* cards */
-  --radius-lg: 16px;
+  /* Radii - Lyra style: none */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 0 rgba(255,255,255,.04), 0 8px 20px rgba(0,0,0,.35);
-  --shadow-md: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.42);
-  --shadow-lg: 0 1px 0 rgba(255,255,255,.08), 0 16px 42px rgba(0,0,0,.5);
+  /* Shadows - subtle for Lyra */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.5);
 
   /* Typography */
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.75rem; /* 28px H2 */
-  --font-size-3xl: 3.5rem;  /* 56px H1 */
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 3.5rem;
 
   /* Spacing (4/8 scale) */
   --space-1: 0.25rem;
@@ -42,10 +39,10 @@
   --space-16: 4rem;
 }
 
-/* Utility hooks for non-TW bits */
+/* Lyra style card - sharp corners */
 .card {
   background: var(--color-card);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: 0;
   box-shadow: var(--shadow-sm);
 }

@@ -1,4 +1,11 @@
 "use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { RESOURCES } from "@/config/resources";
 import "./contact.scss";
 
@@ -51,167 +58,119 @@ const Page = () => {
         </p>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <form
-            onSubmit={onSubmit}
-            className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)]/90 p-6 shadow-sm"
-          >
-            {status === "success" && (
-              <div
-                role="status"
-                className="mb-4 rounded-md bg-emerald-900/30 text-emerald-300 px-3 py-2 border border-emerald-800"
-              >
-                Opening your email client…
-              </div>
-            )}
-            {status === "error" && (
-              <div
-                role="alert"
-                className="mb-4 rounded-md bg-rose-900/30 text-rose-300 px-3 py-2 border border-rose-800"
-              >
-                Please provide a valid email and a message of at least 10
-                characters.
-              </div>
-            )}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-slate-300"
-                >
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="mt-1 w-full rounded-md border border-borderD bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
-                  onBlur={(e) => setErrors((prev) => ({ ...prev, name: e.currentTarget.value.trim() ? undefined : 'Please enter your name' }))}
-                />
-                {errors.name && <p className="mt-1 text-xs text-rose-300">{errors.name}</p>}
-              </div>
-              <div>
-                <label
-                  htmlFor="fromEmail"
-                  className="block text-sm font-medium text-slate-300"
-                >
-                  Email
-                </label>
-                <input
-                  id="fromEmail"
-                  name="fromEmail"
-                  type="email"
-                  required
-                  className="mt-1 w-full rounded-md border border-borderD bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
-                  onBlur={(e) => setErrors((prev) => ({ ...prev, email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.currentTarget.value) ? undefined : 'Enter a valid email' }))}
-                />
-                {errors.email && <p className="mt-1 text-xs text-rose-300">{errors.email}</p>}
-              </div>
-            </div>
-            <div className="mt-4">
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-slate-300"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                minLength={10}
-                rows={5}
-                className="mt-1 w-full rounded-md border border-borderD bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
-                onBlur={(e) => setErrors((prev) => ({ ...prev, message: e.currentTarget.value.trim().length >= 10 ? undefined : 'Message should be at least 10 characters' }))}
-              />
-              {errors.message && <p className="mt-1 text-xs text-rose-300">{errors.message}</p>}
-            </div>
-            <div className="mt-6">
-              <button
-                type="submit"
-                className="inline-flex items-center rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none text-white"
-                style={{ backgroundColor: 'var(--accent)' }}
-              >
-                Send message
-              </button>
-            </div>
-          </form>
-          <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)]/90 p-6 shadow-sm">
-            <div className="space-y-3">
-              <div>
-                <div className="text-sm font-medium text-white">
-                  Email
+          <Card className="bg-card/90">
+            <CardContent className="p-6">
+              <form onSubmit={onSubmit}>
+                {status === "success" && (
+                  <Alert className="mb-4 bg-emerald-900/30 text-emerald-300 border-emerald-800">
+                    <AlertDescription>Opening your email client…</AlertDescription>
+                  </Alert>
+                )}
+                {status === "error" && (
+                  <Alert variant="destructive" className="mb-4">
+                    <AlertDescription>
+                      Please provide a valid email and a message of at least 10 characters.
+                    </AlertDescription>
+                  </Alert>
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      onBlur={(e) => setErrors((prev) => ({ ...prev, name: e.currentTarget.value.trim() ? undefined : 'Please enter your name' }))}
+                    />
+                    {errors.name && <p className="text-xs text-destructive">{errors.name}</p>}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="fromEmail">Email</Label>
+                    <Input
+                      id="fromEmail"
+                      name="fromEmail"
+                      type="email"
+                      required
+                      onBlur={(e) => setErrors((prev) => ({ ...prev, email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.currentTarget.value) ? undefined : 'Enter a valid email' }))}
+                    />
+                    {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
+                  </div>
                 </div>
-                <a
-                  href={`mailto:${email}`}
-                  className="text-sm text-[var(--color-accent)] break-words"
-                >
+                <div className="mt-4 space-y-2">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    required
+                    minLength={10}
+                    rows={5}
+                    onBlur={(e) => setErrors((prev) => ({ ...prev, message: e.currentTarget.value.trim().length >= 10 ? undefined : 'Message should be at least 10 characters' }))}
+                  />
+                  {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
+                </div>
+                <div className="mt-6">
+                  <Button type="submit">Send message</Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+          <Card className="bg-card/90">
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <div className="text-sm font-medium text-white">Email</div>
+                <a href={`mailto:${email}`} className="text-sm text-primary break-words hover:text-primary/80">
                   {email}
                 </a>
               </div>
               <div>
-                <div className="text-sm font-medium text-white">
-                  GitHub
-                </div>
-                <a
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-300 break-words"
-                >
+                <div className="text-sm font-medium text-white">GitHub</div>
+                <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground break-words hover:text-foreground">
                   {github}
                 </a>
               </div>
               <div>
-                <div className="text-sm font-medium text-white">
-                  LinkedIn
-                </div>
-                <a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-300 break-words"
-                >
+                <div className="text-sm font-medium text-white">LinkedIn</div>
+                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground break-words hover:text-foreground">
                   {linkedin}
                 </a>
               </div>
               <div>
-                <div className="text-sm font-medium text-white">
-                  Twitter
-                </div>
-                <a
-                  href={twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-300 break-words"
-                >
+                <div className="text-sm font-medium text-white">Twitter</div>
+                <a href={twitter} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground break-words hover:text-foreground">
                   {twitter}
                 </a>
               </div>
               <div>
                 <div className="text-sm font-medium text-white">Book a call</div>
-                <a href={`mailto:${email}?subject=Book%2015m%20intro%20call`} className="text-sm text-slate-300 underline">Book 15m intro call</a>
+                <a href={`mailto:${email}?subject=Book%2015m%20intro%20call`} className="text-sm text-muted-foreground underline hover:text-foreground">
+                  Book 15m intro call
+                </a>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
-        <div className="mt-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)]/90 p-6 shadow-sm">
-          <h2 className="text-base font-semibold text-white">FAQ</h2>
-          <dl className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-300">
-            <div>
-              <dt className="font-medium text-white">Response time</dt>
-              <dd className="text-slate-300">Typically within 24–48 hours.</dd>
-            </div>
-            <div>
-              <dt className="font-medium text-white">Projects</dt>
-              <dd className="text-slate-300">Frontend apps, performance audits, DX tooling.</dd>
-            </div>
-            <div>
-              <dt className="font-medium text-white">Location</dt>
-              <dd className="text-slate-300">US (remote-friendly).</dd>
-            </div>
-          </dl>
-        </div>
+        <Card className="mt-8 bg-card/90">
+          <CardHeader>
+            <CardTitle className="text-base">FAQ</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="response-time">
+                <AccordionTrigger>Response time</AccordionTrigger>
+                <AccordionContent>Typically within 24–48 hours.</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="projects">
+                <AccordionTrigger>Projects</AccordionTrigger>
+                <AccordionContent>Frontend apps, performance audits, DX tooling.</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="location">
+                <AccordionTrigger>Location</AccordionTrigger>
+                <AccordionContent>US (remote-friendly).</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </CardContent>
+        </Card>
       </section>
       
     </div>
