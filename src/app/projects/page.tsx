@@ -1,70 +1,64 @@
 "use client";
 import Image from "next/image";
-import { Drawer } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { PROJECTS } from "@/config/projects";
 import { useState } from "react";
 import TagsComponent from "../../components/tags/tags";
 
 const Page = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, setOpened] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [filter, setFilter] = useState<'All' | 'Web' | 'Tools'>('All');
 
   const handleClick = (project: any) => {
     setSelectedProject(project);
-    open();
+    setOpened(true);
   };
 
   return (
     <div className="main-container" id="projects">
-      <Drawer
-        className="drawer-container"
-        size="500px"
-        padding="2rem"
-        opened={opened}
-        onClose={close}
-        title={null}
-        position="right"
-        overlayProps={{ color: '#000', opacity: 0.7, blur: 4 }}
-        classNames={{ content: 'bg-[var(--color-card)] text-[var(--color-fg)] border border-[var(--color-border)]' }}
-      >
-        {selectedProject && (
-          <div className="drawer-content text-slate-200">
-            <div className="space-y-3">
-              <h2 className="text-2xl font-semibold">{selectedProject?.name}</h2>
-              <p className="text-sm text-slate-300">{selectedProject?.headerDescription}</p>
-            </div>
-            <div className="mt-4 rounded-lg overflow-hidden border border-slate-800">
-              <Image src={selectedProject?.image} alt={selectedProject?.headerDescription} />
-            </div>
-            <div className="mt-6 space-y-2">
-              <h3 className="text-lg font-medium">About</h3>
-              <p className="text-sm text-slate-300">{selectedProject?.description}</p>
-            </div>
-            <div className="mt-6 space-y-2">
-              <h3 className="text-lg font-medium">Technologies</h3>
-              <TagsComponent size="sm" data={selectedProject?.technologies} />
-            </div>
-            <div className="mt-6 space-y-1">
-              <h3 className="text-lg font-medium">Website</h3>
-              <a rel="noopener noreferrer" target="_blank" href={selectedProject?.website} className="text-sm text-[var(--color-accent)] underline">
-                {selectedProject?.website}
-              </a>
-            </div>
-            <div className="mt-6 space-y-1">
-              <h3 className="text-lg font-medium">GitHub</h3>
-              {selectedProject?.github ? (
-                <a rel="noopener noreferrer" target="_blank" href={selectedProject?.github} className="text-sm text-[var(--color-accent)] underline">
-                  {selectedProject?.github}
+      <Sheet open={opened} onOpenChange={setOpened}>
+        <SheetContent
+          side="right"
+          className="w-[500px] sm:max-w-[500px] bg-[var(--color-card)] text-[var(--color-fg)] border-l border-[var(--color-border)] overflow-y-auto"
+        >
+          {selectedProject && (
+            <div className="drawer-content text-slate-200 pt-6">
+              <div className="space-y-3">
+                <h2 className="text-2xl font-semibold">{selectedProject?.name}</h2>
+                <p className="text-sm text-slate-300">{selectedProject?.headerDescription}</p>
+              </div>
+              <div className="mt-4 rounded-lg overflow-hidden border border-slate-800">
+                <Image src={selectedProject?.image} alt={selectedProject?.headerDescription} />
+              </div>
+              <div className="mt-6 space-y-2">
+                <h3 className="text-lg font-medium">About</h3>
+                <p className="text-sm text-slate-300">{selectedProject?.description}</p>
+              </div>
+              <div className="mt-6 space-y-2">
+                <h3 className="text-lg font-medium">Technologies</h3>
+                <TagsComponent size="sm" data={selectedProject?.technologies} />
+              </div>
+              <div className="mt-6 space-y-1">
+                <h3 className="text-lg font-medium">Website</h3>
+                <a rel="noopener noreferrer" target="_blank" href={selectedProject?.website} className="text-sm text-[var(--color-accent)] underline">
+                  {selectedProject?.website}
                 </a>
-              ) : (
-                <span className="text-sm text-slate-500">Not available</span>
-              )}
+              </div>
+              <div className="mt-6 space-y-1">
+                <h3 className="text-lg font-medium">GitHub</h3>
+                {selectedProject?.github ? (
+                  <a rel="noopener noreferrer" target="_blank" href={selectedProject?.github} className="text-sm text-[var(--color-accent)] underline">
+                    {selectedProject?.github}
+                  </a>
+                ) : (
+                  <span className="text-sm text-slate-500">Not available</span>
+                )}
+              </div>
             </div>
-          </div>
-        )}
-      </Drawer>
+          )}
+        </SheetContent>
+      </Sheet>
       <div className="content py-24">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 className="text-2xl md:text-3xl font-semibold text-white">Projects</h1>

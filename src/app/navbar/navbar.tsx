@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import MobileNavbar from "../mobileNav/mobileNav";
 import { LINKS } from "@/config/routes";
 
