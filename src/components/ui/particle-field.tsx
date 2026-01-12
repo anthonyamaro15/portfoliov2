@@ -1,8 +1,26 @@
 "use client";
 
-import { useRef, useMemo, useEffect } from "react";
+import { useRef, useMemo, useEffect, useState, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import type { RootState } from "@react-three/fiber";
 import * as THREE from "three";
+
+// Component to force resize after mounting
+function ResizeHandler() {
+  const { gl, invalidate } = useThree();
+
+  useEffect(() => {
+    // Force resize after a short delay to ensure proper dimensions
+    const timeout = setTimeout(() => {
+      gl.setSize(gl.domElement.clientWidth, gl.domElement.clientHeight);
+      invalidate();
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [gl, invalidate]);
+
+  return null;
+}
 
 interface ParticlesProps {
   count?: number;
@@ -128,6 +146,27 @@ interface ParticleFieldProps {
 export function ParticleField({ className }: ParticleFieldProps) {
   const mousePosition = useRef({ x: 0.5, y: 0.5 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Delay mounting with setTimeout to ensure DOM is fully ready
+  useEffect(() => {
+    // Use setTimeout instead of RAF for more reliable timing
+    const timeout = setTimeout(() => {
+      setIsMounted(true);
+    }, 50);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Handle Canvas creation - force initial render
+  const handleCreated = useCallback((state: RootState) => {
+    // Force immediate render
+    state.gl.render(state.scene, state.camera);
+    // Trigger resize after creation
+    state.gl.setSize(
+      state.gl.domElement.clientWidth,
+      state.gl.domElement.clientHeight
+    );
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -145,16 +184,40 @@ export function ParticleField({ className }: ParticleFieldProps) {
   }, []);
 
   return (
-    <div ref={containerRef} className={className}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 75 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true }}
-        dpr={[1, 2]}
-      >
-        <Particles count={600} mousePosition={mousePosition} />
-        <ambientLight intensity={0.5} />
-      </Canvas>
+    <div
+      ref={containerRef}
+      className={className}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        minHeight: "90vh",
+      }}
+    >
+      {isMounted && (
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 75 }}
+          style={{
+            background: "transparent",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+          gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }}
+          dpr={[1, 2]}
+          frameloop="always"
+          resize={{ scroll: false, debounce: { scroll: 0, resize: 0 } }}
+          onCreated={handleCreated}
+        >
+          <ResizeHandler />
+          <Particles count={600} mousePosition={mousePosition} />
+          <ambientLight intensity={0.5} />
+        </Canvas>
+      )}
     </div>
   );
 }
