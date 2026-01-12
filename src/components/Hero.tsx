@@ -24,17 +24,42 @@ const techBadges = [
 const FloatingCode = ({
   delay,
   className,
+  variant = "default",
 }: {
   delay: number;
   className: string;
-}) => (
-  <FloatingElement delay={delay} className={className} yOffset={12}>
-    <div className="px-3 py-2 bg-card/60 backdrop-blur-sm border border-border/50 rounded-bento-inner text-xs text-muted-foreground font-mono">
-      <span className="text-emerald-400">const</span> build ={" "}
-      <span className="text-amber-400">()</span> =&gt; ...
-    </div>
-  </FloatingElement>
-);
+  variant?: "default" | "rust" | "react";
+}) => {
+  const snippets = {
+    default: (
+      <>
+        <span className="text-emerald-400">const</span> build ={" "}
+        <span className="text-amber-400">()</span> =&gt; ...
+      </>
+    ),
+    rust: (
+      <>
+        <span className="text-rose-400">fn</span>{" "}
+        <span className="text-blue-400">main</span>
+        <span className="text-amber-400">()</span> {"{"} ... {"}"}
+      </>
+    ),
+    react: (
+      <>
+        <span className="text-cyan-400">&lt;App</span>{" "}
+        <span className="text-amber-400">/&gt;</span>
+      </>
+    ),
+  };
+
+  return (
+    <FloatingElement delay={delay} className={className} yOffset={12}>
+      <div className="px-3 py-2 bg-card/60 backdrop-blur-sm border border-border/50 rounded-bento-inner text-xs text-muted-foreground font-mono">
+        {snippets[variant]}
+      </div>
+    </FloatingElement>
+  );
+};
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -82,15 +107,40 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-[length:32px_32px]" />
       </div>
 
+      {/* Animated vertical lines */}
+      <motion.div
+        className="absolute left-[6%] top-1/4 w-[1px] h-32 bg-gradient-to-b from-transparent via-foreground/15 to-transparent hidden lg:block"
+        initial={{ scaleY: 0, opacity: 0 }}
+        animate={{ scaleY: 1, opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
+        style={{ originY: 0 }}
+      />
+      <motion.div
+        className="absolute right-[6%] bottom-1/3 w-[1px] h-24 bg-gradient-to-b from-transparent via-foreground/10 to-transparent hidden lg:block"
+        initial={{ scaleY: 0, opacity: 0 }}
+        animate={{ scaleY: 1, opacity: 1 }}
+        transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
+        style={{ originY: 1 }}
+      />
+
       {/* Floating decorative elements */}
       <FloatingCode
         delay={0}
         className="absolute top-32 left-[8%] hidden lg:block"
+        variant="default"
       />
       <FloatingCode
         delay={2}
         className="absolute top-48 right-[12%] hidden lg:block"
+        variant="rust"
       />
+      <FloatingCode
+        delay={3.5}
+        className="absolute bottom-48 right-[6%] hidden xl:block"
+        variant="react"
+      />
+
+      {/* Geometric shapes */}
       <FloatingElement
         delay={1}
         className="absolute bottom-40 left-[18%] hidden lg:block"
@@ -104,6 +154,36 @@ export const Hero = () => {
         yOffset={6}
       >
         <div className="w-4 h-4 bg-foreground/10 rounded-full" />
+      </FloatingElement>
+
+      {/* Additional shapes for visual depth */}
+      <FloatingElement
+        delay={2.5}
+        className="absolute top-36 right-[22%] hidden xl:block"
+        yOffset={10}
+      >
+        <div className="w-6 h-6 border border-border/25 rotate-45" />
+      </FloatingElement>
+      <FloatingElement
+        delay={1.5}
+        className="absolute bottom-52 left-[10%] hidden lg:block"
+        yOffset={6}
+      >
+        <div className="w-3 h-3 bg-foreground/8 rotate-45" />
+      </FloatingElement>
+      <FloatingElement
+        delay={4}
+        className="absolute top-72 left-[15%] hidden xl:block"
+        yOffset={8}
+      >
+        <div className="w-8 h-8 border border-border/20 rounded-full" />
+      </FloatingElement>
+      <FloatingElement
+        delay={2}
+        className="absolute bottom-32 right-[18%] hidden lg:block"
+        yOffset={12}
+      >
+        <div className="w-2 h-2 bg-foreground/15 rounded-full" />
       </FloatingElement>
 
       <div className="mx-auto max-w-[1100px] px-5 md:px-8 text-center">
@@ -127,16 +207,26 @@ export const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
-            <AnimatedText text="Anthony Amaro" delay={0.3} />
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95]">
+            <span className="bg-gradient-to-b from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
+              <AnimatedText text="Anthony Amaro" delay={0.3} />
+            </span>
           </h1>
         </motion.div>
+
+        {/* Decorative accent line */}
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-20 h-[2px] bg-gradient-to-r from-foreground/50 via-foreground/25 to-transparent mx-auto mt-5 origin-center"
+        />
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 text-xl md:text-2xl text-muted-foreground font-medium"
+          transition={{ delay: 0.9, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-5 text-xl md:text-2xl text-muted-foreground font-medium"
         >
           Software Engineer
         </motion.p>
@@ -144,7 +234,7 @@ export const Hero = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 1.0, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-6 max-w-[640px] text-base md:text-lg text-muted-foreground leading-relaxed"
         >
           I build high-performance web systems end-to-end — React/Next.js on the
@@ -155,7 +245,7 @@ export const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 1.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Button size="lg" className="rounded-full px-8" asChild>
@@ -175,7 +265,7 @@ export const Hero = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.6 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
           className="mt-12 flex flex-wrap items-center justify-center gap-3"
         >
           {techBadges.map((badge, i) => (
@@ -184,7 +274,7 @@ export const Hero = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
-                delay: 1.4 + i * 0.1,
+                delay: 1.5 + i * 0.1,
                 duration: 0.4,
                 ease: [0.16, 1, 0.3, 1],
               }}
@@ -204,7 +294,7 @@ export const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
+        transition={{ delay: 2.0 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div

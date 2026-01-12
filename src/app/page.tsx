@@ -184,7 +184,7 @@ export default function Home() {
         </motion.div>
       </Section>
 
-      {/* Featured Projects with Tilt Cards */}
+      {/* Featured Projects with Asymmetric Layout */}
       <Section className="mt-16" id="projects">
         <SectionHeading
           eyebrow="Featured"
@@ -197,61 +197,77 @@ export default function Home() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6"
         >
-          {PROJECTS.slice(0, 2).map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
+          {/* Featured Project - Takes 7 columns */}
+          {PROJECTS[0] && (
+            <motion.div
+              key={PROJECTS[0].id}
+              variants={itemVariants}
+              className="lg:col-span-7"
+            >
               <TiltCard>
-                <Card className="group overflow-hidden rounded-bento transition-all duration-400 hover:shadow-[var(--shadow-card-hover)] hover:border-foreground/15">
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-t-bento">
+                <Card className="group h-full overflow-hidden rounded-bento transition-all duration-400 hover:shadow-[var(--shadow-card-hover)] hover:border-foreground/15 relative">
+                  {/* Featured badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <Badge className="bg-foreground text-background font-semibold px-3 py-1 rounded-full text-xs shadow-lg">
+                      Featured
+                    </Badge>
+                  </div>
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-t-bento">
                     <Image
                       className="h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-105"
-                      src={project.image}
-                      alt={project.imgAlt}
+                      src={PROJECTS[0].image}
+                      alt={PROJECTS[0].imgAlt}
                       fill
                     />
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
                     {/* Shine effect on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Border glow on hover */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute inset-0 rounded-t-bento ring-1 ring-inset ring-foreground/10" />
+                    </div>
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {project.name}
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {PROJECTS[0].name}
                     </h3>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      {project.headerDescription}
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                      {PROJECTS[0].headerDescription}
                     </p>
-                    {project.metrics && (
-                      <div className="mt-4 grid grid-cols-2 gap-2">
-                        {project.metrics.slice(0, 2).map((m: string, i: number) => (
-                          <div
-                            key={i}
-                            className="border border-border bg-muted/20 px-3 py-2 text-xs text-muted-foreground rounded-bento-inner"
-                          >
-                            {m}
-                          </div>
-                        ))}
+                    {PROJECTS[0].metrics && (
+                      <div className="mt-5 flex gap-3">
+                        {PROJECTS[0].metrics
+                          .slice(0, 2)
+                          .map((m: string, i: number) => (
+                            <div
+                              key={i}
+                              className="flex items-center gap-2 border border-border bg-muted/20 px-4 py-2.5 text-xs text-muted-foreground rounded-bento-inner"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                              {m}
+                            </div>
+                          ))}
                       </div>
                     )}
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {project.technologies
-                        ?.slice(0, 5)
-                        .map((t: string, i: number) => (
-                          <Badge
-                            key={i}
-                            variant="secondary"
-                            className="text-xs rounded-full"
-                          >
-                            {t}
-                          </Badge>
-                        ))}
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {PROJECTS[0].technologies?.map((t: string, i: number) => (
+                        <Badge
+                          key={i}
+                          variant="secondary"
+                          className="text-xs rounded-full"
+                        >
+                          {t}
+                        </Badge>
+                      ))}
                     </div>
                     <div className="mt-6 flex gap-3">
-                      {project.website && (
+                      {PROJECTS[0].website && (
                         <Button size="sm" className="rounded-full" asChild>
                           <a
-                            href={project.website}
+                            href={PROJECTS[0].website}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -259,7 +275,7 @@ export default function Home() {
                           </a>
                         </Button>
                       )}
-                      {project.github && (
+                      {PROJECTS[0].github && (
                         <Button
                           size="sm"
                           variant="outline"
@@ -267,7 +283,7 @@ export default function Home() {
                           asChild
                         >
                           <a
-                            href={project.github}
+                            href={PROJECTS[0].github}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -280,7 +296,83 @@ export default function Home() {
                 </Card>
               </TiltCard>
             </motion.div>
-          ))}
+          )}
+
+          {/* Secondary Project - Takes 5 columns, compact style */}
+          {PROJECTS[1] && (
+            <motion.div
+              key={PROJECTS[1].id}
+              variants={itemVariants}
+              className="lg:col-span-5"
+            >
+              <TiltCard>
+                <Card className="group h-full overflow-hidden rounded-bento transition-all duration-400 hover:shadow-[var(--shadow-card-hover)] hover:border-foreground/15">
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-t-bento">
+                    <Image
+                      className="h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-105"
+                      src={PROJECTS[1].image}
+                      alt={PROJECTS[1].imgAlt}
+                      fill
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                    {/* Shine effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                  <CardContent className="p-5">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {PROJECTS[1].name}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                      {PROJECTS[1].headerDescription}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {PROJECTS[1].technologies
+                        ?.slice(0, 4)
+                        .map((t: string, i: number) => (
+                          <Badge
+                            key={i}
+                            variant="secondary"
+                            className="text-xs rounded-full"
+                          >
+                            {t}
+                          </Badge>
+                        ))}
+                    </div>
+                    <div className="mt-5 flex gap-3">
+                      {PROJECTS[1].website && (
+                        <Button size="sm" className="rounded-full" asChild>
+                          <a
+                            href={PROJECTS[1].website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Live Demo
+                          </a>
+                        </Button>
+                      )}
+                      {PROJECTS[1].github && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full"
+                          asChild
+                        >
+                          <a
+                            href={PROJECTS[1].github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Source
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TiltCard>
+            </motion.div>
+          )}
         </motion.div>
       </Section>
 
