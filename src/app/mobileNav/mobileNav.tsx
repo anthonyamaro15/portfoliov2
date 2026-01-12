@@ -1,7 +1,6 @@
 "use client";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { GiAzulFlake } from "react-icons/gi";
 import { HiMenu, HiX } from "react-icons/hi";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -17,9 +16,17 @@ const MobileNavbar = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur bg-background/60 border-b border-border">
+    <nav className="sticky top-0 z-50 nav-blur border-b border-border">
       <div className="main-container flex items-center justify-between py-3">
-        <span className="text-2xl text-slate-100"><GiAzulFlake /></span>
+        {/* Match desktop branding */}
+        <div className="flex items-center gap-2 text-foreground">
+          <span className="inline-flex h-8 w-8 items-center justify-center bg-foreground text-background font-bold text-sm">
+            AA
+          </span>
+          <span className="font-semibold tracking-tight">
+            Anthony Amaro
+          </span>
+        </div>
         <Button
           variant="ghost"
           size="icon"
@@ -34,20 +41,24 @@ const MobileNavbar = () => {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent
           side="right"
-          className="w-full sm:max-w-full bg-card text-foreground border-l border-border"
+          className="w-full sm:max-w-full bg-background text-foreground border-l border-border"
         >
-          <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6">
+          <div className="min-h-[60vh] flex flex-col items-center justify-center gap-8">
             {LINKS.map((link) => (
               <Link
                 key={link.path}
                 href={link.path}
                 onClick={handleClose}
-                className={`${pathname === link.path ? 'text-white' : 'text-muted-foreground hover:text-white'} text-xl transition-colors`}
+                className={`text-2xl font-medium transition-colors ${
+                  pathname === link.path
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild className="mt-4">
+            <Button size="lg" asChild className="mt-4">
               <Link href="/blogs" onClick={handleClose}>Blogs</Link>
             </Button>
           </div>
