@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import {
   motion,
   useScroll,
@@ -13,6 +14,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { FloatingElement } from "@/components/ui/floating-element";
+
+// Dynamic import for Three.js component (requires WebGL)
+const ParticleField = dynamic(
+  () => import("@/components/ui/particle-field").then((mod) => mod.ParticleField),
+  { ssr: false }
+);
 
 const techBadges = [
   "4+ years shipping",
@@ -93,18 +100,21 @@ export const Hero = () => {
       className="relative overflow-hidden min-h-[90vh] flex items-center justify-center pt-16"
       style={{ opacity: heroOpacity, y: heroY }}
     >
+      {/* Three.js Particle Field Background */}
+      <ParticleField className="absolute inset-0 -z-10" />
+
       {/* Animated gradient orbs */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-radial from-white/[0.07] to-transparent blur-3xl"
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-radial from-white/[0.05] to-transparent blur-3xl"
           style={{ x: orb1X, y: orb1Y }}
         />
         <motion.div
-          className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-radial from-white/[0.04] to-transparent blur-3xl"
+          className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-radial from-white/[0.03] to-transparent blur-3xl"
           style={{ x: orb2X, y: orb2Y }}
         />
         {/* Grid overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-[length:32px_32px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.02)_1px,transparent_0)] bg-[length:32px_32px]" />
       </div>
 
       {/* Animated vertical lines */}
