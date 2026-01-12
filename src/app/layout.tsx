@@ -7,8 +7,13 @@ import Footer from "./footer/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfoliov2-green.vercel.app/"),
-  title: "Anthony Amaro",
+  metadataBase: new URL("https://www.anthonyamaro.dev/"),
+  title: {
+    default: "Anthony Amaro — Full-Stack Software Engineer (React, Node, Rust)",
+    template: "%s | Anthony Amaro",
+  },
+  description:
+    "I build high-performance web systems end-to-end: React/Next.js, Node/Postgres, and Rust where latency matters. Deploying to Vercel, AWS, Azure.",
   keywords: [
     "Software",
     "Engineer",
@@ -19,10 +24,25 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Software Developer",
     "Anthony Amaro",
+    "React",
+    "Node",
+    "Rust",
   ],
-  themeColor: "#000000",
-  description:
-    "Hi,  I'm a dedicated and passionate software engineer who thrives on turning intricate challenges into elegant solutions",
+  openGraph: {
+    type: "website",
+    title: "Anthony Amaro — Full-Stack Software Engineer",
+    description:
+      "I build high-performance web systems end-to-end: React/Next.js, Node/Postgres, and Rust where latency matters.",
+    url: "https://www.anthonyamaro.dev/",
+    images: ["/api/og?title=Anthony%20Amaro"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anthony Amaro — Full-Stack Software Engineer",
+    description:
+      "I build high-performance web systems end-to-end: React/Next.js, Node/Postgres, and Rust where latency matters.",
+    images: ["/api/og?title=Anthony%20Amaro"],
+  },
 };
 
 export default function RootLayout({

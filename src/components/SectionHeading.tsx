@@ -19,17 +19,17 @@ export const SectionHeading: React.FC<Props> = ({
 }) => {
   const alignClass = align === 'center' ? 'text-center items-center' : 'text-left items-start';
   return (
-    <div className={`flex flex-col gap-2 ${alignClass} ${className ?? ''}`}>
+    <div className={`flex flex-col gap-3 ${alignClass} ${className ?? ''}`}>
       {eyebrow && (
-        <span className="text-[11px] uppercase tracking-widest text-slate-400">
+        <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
           {eyebrow}
         </span>
       )}
-      <h2 className="text-2xl md:text-3xl font-semibold text-white">
+      <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
         {title}
       </h2>
       {subtitle && (
-        <p className="max-w-2xl text-slate-300 text-sm md:text-base">
+        <p className="max-w-2xl text-muted-foreground text-base leading-relaxed">
           {subtitle}
         </p>
       )}
