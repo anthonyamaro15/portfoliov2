@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const path = require('path');
 let withMDX = (config) => config;
 try {
   // Ensure both @next/mdx and its peer loader exist before enabling.
@@ -16,9 +15,6 @@ try {
 }
 
 const nextConfig = {
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };
 
